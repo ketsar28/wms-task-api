@@ -1,0 +1,148 @@
+### CREATE BRANCH
+POST http://localhost:8080/api/branch
+Accept: application/json
+Content-Type: application/json
+
+{
+  "branchCode": "1122",
+  "branchName": "Depok",
+  "address": "Jl. Sukmajaya No. 456",
+  "phoneNumber": "082345678902"
+}
+
+### GET BRANCH BY ID
+GET http://localhost:8080/api/branch/48bd465e-b6bb-46e3-8534-6d8b9312848a
+Accept: application/json
+
+### GET ALL BRANCH
+GET http://localhost:8080/api/branch
+Accept: application/json
+
+### UPDATE BRANCH
+PUT http://localhost:8080/api/branch
+Accept: application/json
+Content-Type: application/json
+
+{
+  "branchId": "48bd465e-b6bb-46e3-8534-6d8b9312848a",
+  "branchCode": "2233",
+  "branchName": "Surabaya",
+  "address": "Jl. Raya Darmo No. 123",
+  "phoneNumber": "081234567890"
+}
+
+
+### DELETE BRANCH
+DELETE http://localhost:8080/api/branch/79bca630-b841-4424-9a30-edecbb706ecb
+Accept: application/json
+
+
+### CREATE PRODUCT
+POST http://localhost:8080/api/products
+Accept: application/json
+Content-Type: application/json
+
+{
+  "productCode": "01-001",
+  "productName": "Ketoprak",
+  "price": 12000,
+  "branchId": "48bd465e-b6bb-46e3-8534-6d8b9312848a"
+}
+
+
+### GET ALL PRODUCT BY BRANCH ID
+GET http://localhost:8080/api/products/b5cd1c8d-f6fb-469a-8307-cdbe1c3eb412
+Accept: application/json
+
+
+### GET ALL PRODUCT
+GET http://localhost:8080/api/products
+Accept: application/json
+
+### GET ALL PRODUCT BY PRODUCT CODE
+GET http://localhost:8080/api/products?productCode=001
+Accept: application/json
+
+### GET ALL PRODUCT BY NAME
+GET http://localhost:8080/api/products?productName=roma
+Accept: application/json
+
+### GET ALL PRODUCT BY MAX PRICE
+GET http://localhost:8080/api/products?maxPrice=5000
+Accept: application/json
+
+### GET ALL PRODUCT BY MIN PRICE
+GET http://localhost:8080/api/products?minPrice=7000
+Accept: application/json
+
+### GET ALL PRODUCT BY MAX PRICE AND BY PAGE
+GET http://localhost:8080/api/products?maxPrice=5000&page=0
+Accept: application/json
+
+### GET ALL PRODUCT BY MAX PRICE AND BY PAGE AND BY SIZE
+GET http://localhost:8080/api/products?maxPrice=7000&page=3&size=2
+Accept: application/json
+
+
+### UPDATE PRODUCT
+PUT http://localhost:8080/api/products
+Accept: application/json
+Content-Type: application/json
+
+{
+  "productId": "95264a59-59a5-4c2a-ba7e-d19e3f723e41",
+  "productCode": "01-002",
+  "productName": "Mixue",
+  "price": 18000,
+  "branchId": "59114803-02d9-42a3-af8b-ec9c880157af"
+}
+
+### REMOVE PRODUCT
+DELETE http://localhost:8080/api/products/03dee8a7-b551-4634-9781-231e54863ac7
+Accept: application/json
+
+
+### CREATE TRANSACTION
+POST http://localhost:8080/api/transactions
+Accept: application/json
+Content-Type: application/json
+
+{
+  "transactionType": "3",
+  "billDetails": [
+    {
+      "quantity": 2,
+      "productPriceId": "60c8f82e-8775-4e57-9a8b-c62b44fdb434"
+    },
+    {
+      "quantity": 4,
+      "productPriceId": "ce5a0d0a-404f-48cd-b427-fb2dd1ea1efd"
+    }
+  ]
+}
+
+### GET ALL TRANSACTION
+GET http://localhost:8080/api/transactions
+Accept: application/json
+
+### GET TRANSACTION BY BILL ID
+GET http://localhost:8080/api/transactions/f22b6593-2927-4ede-a727-6c9dfc9e70c5
+Accept: application/json
+
+### GET TRANSACTIONS LIST BY PRODUCT NAME
+GET http://localhost:8080/api/transactions?productName=nasi
+Accept: application/json
+
+### GET TRANSACTION BY RECEIPT NUMBER
+GET http://localhost:8080/api/transactions?receiptNumber=0205-2023-001
+Accept: application/json
+
+
+### GET TRANSACTION BY SIZE AND PAGE
+GET http://localhost:8080/api/transactions?size=2&page=1
+Accept: application/json
+
+### GET TOTAL SALES OF TRANSACTION
+GET http://localhost:8080/api/transactions/total-sales
+Accept: application/json
+
