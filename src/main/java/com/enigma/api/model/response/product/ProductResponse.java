@@ -1,5 +1,7 @@
 package com.enigma.api.model.response.product;
 import com.enigma.api.model.response.branch.BranchResponse;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -16,4 +18,11 @@ public class ProductResponse {
     private String productName;
     private BigDecimal price;
     private BranchResponse branch;
+
+    @JsonProperty("productPriceId")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String getTotalSalesForResponse() {
+        return productPriceId;
+    }
+
 }

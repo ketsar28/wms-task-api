@@ -46,12 +46,12 @@ Content-Type: application/json
   "productCode": "01-001",
   "productName": "Ketoprak",
   "price": 12000,
-  "branchId": "48bd465e-b6bb-46e3-8534-6d8b9312848a"
+  "branchId": "bb609eaf-5a28-4eca-970e-f1490ab2a9d5"
 }
 
 
 ### GET ALL PRODUCT BY BRANCH ID
-GET http://localhost:8080/api/products/b5cd1c8d-f6fb-469a-8307-cdbe1c3eb412
+GET http://localhost:8080/api/products/bb609eaf-5a28-4eca-970e-f1490ab2a9d5
 Accept: application/json
 
 
@@ -90,11 +90,11 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "productId": "95264a59-59a5-4c2a-ba7e-d19e3f723e41",
+  "productId": "58576743-cfc0-4de8-a96a-893759a4c8e4",
   "productCode": "01-002",
   "productName": "Mixue",
   "price": 18000,
-  "branchId": "59114803-02d9-42a3-af8b-ec9c880157af"
+  "branchId": "bb609eaf-5a28-4eca-970e-f1490ab2a9d5"
 }
 
 ### REMOVE PRODUCT
