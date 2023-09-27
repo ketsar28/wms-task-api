@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -32,6 +33,7 @@ public class BranchServiceImpl implements BranchService {
                 .build();
     }
 
+    @Transactional(rollbackOn = Exception.class)
     @Override
     public BranchResponse createBranch(BranchRequest request) {
 
@@ -68,6 +70,7 @@ public class BranchServiceImpl implements BranchService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(rollbackOn = Exception.class)
     @Override
     public BranchResponse updateBranch(BranchRequest request) {
         Branch branch = branchRepository.findById(request.getBranchId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "branch is not found"));

@@ -18,27 +18,21 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@Table(name = "m_product")
+@Table(name = "m_order_detail")
 @EntityListeners({AuditingEntityListener.class})
-public class Product {
+public class OrderDetail {
+
 
     @Id
     @GenericGenerator(strategy = "uuid2", name="system-uuid")
     @GeneratedValue(generator = "system-uuid")
-    @Column(name = "product_id")
-    private String productId;
+    @Column(name = "bill_detail_id")
+    private String billDetailId;
 
-    @Column(name = "product_price_id")
-    private String productPriceId;
+    private Integer quantity;
 
-    @Column(name = "product_code", nullable = false, unique = true)
-    private String productCode;
-
-    @Column(name = "product_name", nullable = false)
-    private String productName;
-
-    @Column(columnDefinition = "decimal check (price > 0)")
-    private BigDecimal price;
+    @Column(name = "total_sales")
+    private BigDecimal totalSales;
 
     @CreatedDate
     @Column(name = "created_date")
@@ -49,6 +43,12 @@ public class Product {
     private Instant lastModifiedDate;
 
     @ManyToOne
-    @JoinColumn(name = "branch_id")
-    private Branch branch;
+    @JoinColumn(name = "bill_id", referencedColumnName = "bill_id")
+    private Transaction bill;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    private Product product;
+
 }
+

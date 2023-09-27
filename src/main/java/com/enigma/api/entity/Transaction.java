@@ -1,5 +1,6 @@
 package com.enigma.api.entity;
 
+import com.enigma.api.entity.enums.TransEnum;
 import lombok.*;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -8,8 +9,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Getter
@@ -18,27 +20,21 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@Table(name = "m_product")
+@Table(name = "m_order")
 @EntityListeners({AuditingEntityListener.class})
-public class Product {
+public class Transaction {
 
     @Id
     @GenericGenerator(strategy = "uuid2", name="system-uuid")
     @GeneratedValue(generator = "system-uuid")
-    @Column(name = "product_id")
-    private String productId;
+    @Column(name = "bill_id")
+    private String billId;
 
-    @Column(name = "product_price_id")
-    private String productPriceId;
+    @Column(name = "receipt_number")
+    private String receiptNumber;
 
-    @Column(name = "product_code", nullable = false, unique = true)
-    private String productCode;
-
-    @Column(name = "product_name", nullable = false)
-    private String productName;
-
-    @Column(columnDefinition = "decimal check (price > 0)")
-    private BigDecimal price;
+    @Column(name = "trans_date")
+    private LocalDateTime transDate;
 
     @CreatedDate
     @Column(name = "created_date")
@@ -48,7 +44,10 @@ public class Product {
     @Column(name = "last_modified_date")
     private Instant lastModifiedDate;
 
-    @ManyToOne
-    @JoinColumn(name = "branch_id")
-    private Branch branch;
+    @Column(name = "transaction_type")
+    @Enumerated(EnumType.STRING)
+    private TransEnum transactionType;
+
+    @OneToMany(mappedBy = "bill")
+    private List<OrderDetail> billDetails;
 }

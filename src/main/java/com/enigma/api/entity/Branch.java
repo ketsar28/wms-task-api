@@ -24,6 +24,7 @@ public class Branch {
     @Id
     @GenericGenerator(strategy = "uuid2", name="system-uuid")
     @GeneratedValue(generator = "system-uuid")
+    @Column(name = "branch_id")
     private String branchId;
 
     @Column(name = "branch_code", nullable = false, unique = true)

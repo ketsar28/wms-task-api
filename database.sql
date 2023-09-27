@@ -23,7 +23,7 @@ SELECT * FROM m_transactions;
 DELETE FROM m_transactions;
 
 DESC m_bill_detail;
-SELECT * FROM  m_bill_detail;
+SELECT * FROM  m_order_detail;
 DELETE FROM m_bill_detail;
 DROP TABLE m_bill_detail;
 

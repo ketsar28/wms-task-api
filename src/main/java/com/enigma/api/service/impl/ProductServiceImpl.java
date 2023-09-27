@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import javax.persistence.criteria.Predicate;
+import javax.transaction.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
     private final BranchRepository branchRepository;
     private final BranchService branchService;
 
-    private static void saveToDb(ProductRequest request, Product product, BranchResponse isBranchExists) {
+    private void saveToDb(ProductRequest request, Product product, BranchResponse isBranchExists) {
         product.setPrice(request.getPrice());
         product.setProductId(request.getProductId());
         product.setProductCode(request.getProductCode());
@@ -46,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
                 .build());
     }
 
-    private static ProductResponse toProductResponse(Product product, Boolean isIncludeProductPrice) {
+    private ProductResponse toProductResponse(Product product, Boolean isIncludeProductPrice) {
         ProductResponse.ProductResponseBuilder products = ProductResponse.builder()
                 .productId(product.getProductId())
                 .productCode(product.getProductCode())
@@ -77,6 +78,7 @@ public class ProductServiceImpl implements ProductService {
                 .build();
     }
 
+    @Transactional(rollbackOn = Exception.class)
     @Override
     public ProductResponse createProduct(ProductRequest request) {
         BranchResponse isBranchExists = branchService.getBranchById(request.getBranchId());
@@ -151,6 +153,7 @@ public class ProductServiceImpl implements ProductService {
         return new PageImpl<>(productResponses, pageable, products.getTotalElements());
     }
 
+    @Transactional(rollbackOn = Exception.class)
     @Override
     public ProductResponse updateProduct(ProductRequest request) {
         BranchResponse branch = branchService.getBranchById(request.getBranchId());
